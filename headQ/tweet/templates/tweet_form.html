@@ -12,6 +12,12 @@ Django Tweet
      {% else %} 
         Create Tweet      
      {% endif %} 
+     <form class="form"  method="post" enctype= "multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-warning" type= "submit">Submit</button>
+    </form>
+     <a href="{% url 'tweet_list'%}">Back to Tweet list</a>
 </h2>
 
 {% endblock %}
