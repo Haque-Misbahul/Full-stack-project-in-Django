@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Django Tweet - Search Results
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mt-4">Search Results</h1>
+
+<div class="container row gap-3">
+    {% if results %}
+        {% for tweet in results %}
+        <div class="card" style="width: 18rem;">
+            {% if tweet.photo %}
+            <img src="{{ tweet.photo.url }}" class="card-img-top mt-2" alt="Tweet Photo">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ tweet.user.username }}</h5>
+                <p class="card-text">{{ tweet.text }}</p>
+                {% if tweet.user == user %}
+                <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center">No results found for "{{ query }}".</p>
+    {% endif %}
+</div>
+
+{% endblock %}
